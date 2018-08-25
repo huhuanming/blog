@@ -1,68 +1,42 @@
 import React from 'react'
 import { Link } from 'gatsby'
-
 import { rhythm, scale } from '../utils/typography'
 
-class Template extends React.Component {
-  render() {
-    const { location, children } = this.props
-    const rootPath = `${__PATH_PREFIX__}/`
-    let header
+class Template extends React.PureComponent {
+  state = {
+    height: undefined,
+  }
 
-    if (location.pathname === rootPath) {
-      header = (
-        <h1
-          style={{
-            ...scale(1.5),
-            marginBottom: rhythm(1.5),
-            marginTop: 0,
-          }}
-        >
-          <Link
-            style={{
-              boxShadow: 'none',
-              textDecoration: 'none',
-              color: 'inherit',
-            }}
-            to={'/'}
-          >
-            Gatsby Starter Blog
-          </Link>
-        </h1>
-      )
-    } else {
-      header = (
-        <h3
-          style={{
-            fontFamily: 'Montserrat, sans-serif',
-            marginTop: 0,
-            marginBottom: rhythm(-1),
-          }}
-        >
-          <Link
-            style={{
-              boxShadow: 'none',
-              textDecoration: 'none',
-              color: 'inherit',
-            }}
-            to={'/'}
-          >
-            Gatsby Starter Blog
-          </Link>
-        </h3>
-      )
-    }
+  updatelayoutSize = () => {
+    this.setState({
+      height: window.innerHeight,
+    })
+  }
+
+  componentDidMount() {
+    this.updatelayoutSize()
+    window.addEventListener('resize', this.updatelayoutSize)
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.updatelayoutSize)
+  }
+
+  render() {
     return (
       <div
         style={{
-          marginLeft: 'auto',
-          marginRight: 'auto',
-          maxWidth: rhythm(24),
-          padding: `${rhythm(1.5)} ${rhythm(3 / 4)}`,
+          height: this.state.height,
+          background: 'rgb(48, 63, 159)',
+          padding: 30,
         }}
       >
-        {header}
-        {children}
+        <div
+          style={{
+            height: '100%',
+            background: 'white',
+          }}
+        />{' '}
       </div>
     )
   }
