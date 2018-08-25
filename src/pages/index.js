@@ -9,6 +9,8 @@ import Typist from 'react-typist'
 
 import 'react-typist/dist/Typist.css'
 
+const profileWords = ['前端开发工程师', '也略懂 Native 开发', 'Base 成都']
+
 class BlogIndex extends React.PureComponent {
   render() {
     const siteTitle = get(this, 'props.data.site.siteMetadata.title')
@@ -29,9 +31,12 @@ class BlogIndex extends React.PureComponent {
           <div style={{ textAlign: 'center', width: '100%' }}>
             <GlitchText>Hu Huanming</GlitchText>
             <Typist cursor={{ hideWhenDone: true }}>
-              <span> First Sentence </span>
-              <Typist.Backspace count={8} delay={200} />
-              <span> Phrase </span>
+              {profileWords.map(words => (
+                <span key={words}>
+                  <span>{words}</span>
+                  <Typist.Backspace count={words.length} delay={400} />
+                </span>
+              ))}
             </Typist>
           </div>
         </div>
