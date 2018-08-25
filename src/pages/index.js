@@ -12,6 +12,23 @@ import 'react-typist/dist/Typist.css'
 const profileWords = ['前端开发工程师', '也略懂 Native 开发', 'Base 成都']
 
 class BlogIndex extends React.PureComponent {
+  state = {
+    typing: true,
+  }
+
+  handleTypingDone = () => {
+    this.setState(
+      {
+        typing: false,
+      },
+      () => {
+        setTimeout(() => {
+          this.setState({ typing: true })
+        }, 1200)
+      }
+    )
+  }
+
   render() {
     const siteTitle = get(this, 'props.data.site.siteMetadata.title')
     const siteDescription = get(
@@ -30,14 +47,18 @@ class BlogIndex extends React.PureComponent {
         <div style={{ display: 'flex', alignItems: 'center', height: '100%' }}>
           <div style={{ textAlign: 'center', width: '100%' }}>
             <GlitchText>Hu Huanming</GlitchText>
-            <Typist cursor={{ hideWhenDone: true }}>
-              {profileWords.map(words => (
-                <span key={words}>
-                  <span>{words}</span>
-                  <Typist.Backspace count={words.length} delay={400} />
-                </span>
-              ))}
-            </Typist>
+            {this.state.typing ? (
+              <Typist onTypingDone={this.handleTypingDone}>
+                {profileWords.map(words => (
+                  <span key={words}>
+                    <span>{words}</span>
+                    <Typist.Backspace count={words.length} delay={500} />
+                  </span>
+                ))}
+              </Typist>
+            ) : (
+              <span>&nbsp;</span>
+            )}
           </div>
         </div>
       </Layout>
