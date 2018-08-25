@@ -36,7 +36,9 @@ class Template extends React.PureComponent {
             height: '100%',
             background: 'white',
           }}
-        />{' '}
+        >
+          {this.props.children}
+        </div>
       </div>
     )
   }

@@ -30,6 +30,7 @@
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
     "react-helmet": "^5.2.0",
+    "react-typist": "^2.0.4",
     "react-typography": "^0.16.13",
     "typeface-merriweather": "0.0.54",
     "typeface-montserrat": "0.0.54",
@@ -55,6 +56,7 @@
   },
   "scripts": {
     "dev": "gatsby develop",
+    "start": "gatsby develop",
     "lint": "./node_modules/.bin/eslint --ext .js,.jsx --ignore-pattern public .",
     "test": "echo \"Error: no test specified\" && exit 1",
     "format": "prettier --trailing-comma es5 --no-semi --single-quote --write 'src/**/*.js' 'src/**/*.md'",
